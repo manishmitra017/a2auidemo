@@ -1,6 +1,5 @@
 const AGENT_URL = 'http://localhost:10002';
 const A2UI_EXTENSION_URI = 'https://a2ui.org/a2a-extension/a2ui/v0.9';
-let taskContextId = null;
 let requesting = false;
 let responseCount = 0;
 
@@ -80,9 +79,7 @@ async function callAgent(parts) {
       },
     };
 
-    if (taskContextId) {
-      body.params.message.contextId = taskContextId;
-    }
+    // Each query starts a fresh task context so responses don't mix
 
     const resp = await fetch(`${AGENT_URL}/`, {
       method: 'POST',
@@ -102,9 +99,6 @@ async function callAgent(parts) {
     }
 
     const task = result.result;
-    if (task && task.contextId) {
-      taskContextId = task.contextId;
-    }
 
     const a2uiMessages = [];
     const textMessages = [];
@@ -127,13 +121,10 @@ async function callAgent(parts) {
       }
     }
 
-    // Only extract from the status message (latest response).
-    // History contains ALL previous messages which would duplicate old surfaces.
     if (task && task.status && task.status.message) {
       extractParts(task.status.message);
     }
 
-    // If status message had no parts, check the last agent message in history
     if (a2uiMessages.length === 0 && textMessages.length === 0 && task && task.history) {
       const agentMsgs = task.history.filter(m => m.role === 'agent');
       if (agentMsgs.length > 0) {
