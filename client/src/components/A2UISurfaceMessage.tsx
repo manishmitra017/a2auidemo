@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, memo } from 'react'
 import { MessageProcessor } from '@a2ui/web_core/v0_9'
-import { A2uiSurface, basicCatalog } from '@a2ui/react/v0_9'
+import { A2uiSurface } from '@a2ui/react/v0_9'
+import { basicCatalog } from '../catalog'
 import type { A2UIMessage } from '../api/agent'
 import type { SurfaceModel } from '@a2ui/web_core/v0_9'
 
