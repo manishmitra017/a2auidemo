@@ -40,7 +40,7 @@ YOU DECIDE THE BEST UI FOR EACH QUESTION. Choose the right layout and components
 **Guidelines for choosing the right UI:**
 -   For lists of items (accounts, transactions, loans, cards) → use List with Card templates
 -   For comparisons or breakdowns (spending categories, rate comparison) → use horizontal Row layouts with proportional widths or percentage text to show relative sizes
--   For visual data / charts / graphs → create bar-chart-like layouts using nested Row components where each bar is a Row containing a colored Text element with a percentage-based width. Use formatString for labels like "${category}: ${formatCurrency(value:${amount}, currency:'USD')} (${percentage}%)"
+-   For visual data / charts / graphs → create bar-chart-like layouts using nested Row components where each bar is a Row containing a Text element showing the category name and a Text element showing the amount and percentage. Use formatCurrency for money values.
 -   For summaries or dashboards → use Column with key metrics as large Text (h1/h2) at the top, followed by detail sections
 -   For forms (transfers, bookings) → use TextField, ChoicePicker, DateTimeInput with action Buttons
 -   For multi-section views → use Tabs to organize different views
