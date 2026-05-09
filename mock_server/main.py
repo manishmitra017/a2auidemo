@@ -354,7 +354,7 @@ def get_transactions(
     customer_id: str,
     account_id: str = "",
     category: str = "",
-    count: int = Query(default=10, le=50),
+    count: int = Query(default=10),
 ):
     txns = [t for t in TRANSACTIONS if ACCOUNTS.get(t["account"], {}).get("customerId") == customer_id]
     if account_id:
