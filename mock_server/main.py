@@ -354,6 +354,7 @@ def get_transactions(
     customer_id: str,
     account_id: str = "",
     category: str = "",
+    sort_by: str = "",
     count: int = Query(default=10),
 ):
     txns = [t for t in TRANSACTIONS if ACCOUNTS.get(t["account"], {}).get("customerId") == customer_id]
@@ -361,6 +362,14 @@ def get_transactions(
         txns = [t for t in txns if t["account"] == account_id]
     if category:
         txns = [t for t in txns if t["category"].lower() == category.lower()]
+    if sort_by == "amount_desc":
+        txns = sorted(txns, key=lambda t: abs(t["amount"]), reverse=True)
+    elif sort_by == "amount_asc":
+        txns = sorted(txns, key=lambda t: abs(t["amount"]))
+    elif sort_by == "date_desc":
+        txns = sorted(txns, key=lambda t: t["date"], reverse=True)
+    elif sort_by == "date_asc":
+        txns = sorted(txns, key=lambda t: t["date"])
     return {"transactions": txns[:count], "totalCount": len(txns)}
 
 

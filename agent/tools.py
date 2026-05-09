@@ -40,15 +40,18 @@ def get_transactions(
     tool_context: ToolContext,
     account_id: str = "",
     category: str = "",
+    sort_by: str = "",
     count: int = 10,
 ) -> str:
-    """Get recent transactions. Optionally filter by account_id or category. Returns up to 'count' transactions."""
-    logger.info(f"--- TOOL: get_transactions (customer={customer_id}, account={account_id}, category={category}, count={count}) ---")
+    """Get transactions. Optionally filter by account_id or category. Use sort_by for sorting: 'amount_desc' for highest first, 'amount_asc' for lowest first, 'date_desc' for newest first, 'date_asc' for oldest first. Returns up to 'count' transactions."""
+    logger.info(f"--- TOOL: get_transactions (customer={customer_id}, account={account_id}, category={category}, sort={sort_by}, count={count}) ---")
     params = f"?count={count}"
     if account_id:
         params += f"&account_id={account_id}"
     if category:
         params += f"&category={category}"
+    if sort_by:
+        params += f"&sort_by={sort_by}"
     result = _api_get(f"/api/customers/{customer_id}/transactions{params}")
     return json.dumps(result)
 
