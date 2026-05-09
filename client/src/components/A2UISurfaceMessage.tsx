@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, memo } from 'react'
 import { MessageProcessor } from '@a2ui/web_core/v0_9'
 import { A2uiSurface, basicCatalog } from '@a2ui/react/v0_9'
 import type { A2UIMessage } from '../api/agent'
@@ -9,19 +9,14 @@ interface Props {
   onAction: (name: string, context: Record<string, unknown>) => void
 }
 
-export default function A2UISurfaceMessage({ messages, onAction }: Props) {
+function A2UISurfaceMessageInner({ messages, onAction }: Props) {
   const [surfaces, setSurfaces] = useState<Array<{ id: string; model: SurfaceModel<never> }>>([])
   const processorRef = useRef<MessageProcessor<never> | null>(null)
-  const processedRef = useRef(false)
 
   useEffect(() => {
-    if (processedRef.current) return
-    processedRef.current = true
-
     const processor = new MessageProcessor([basicCatalog]) as MessageProcessor<never>
     processorRef.current = processor
 
-    // Collect surface IDs from messages
     const surfaceIds: string[] = []
     for (const msg of messages) {
       if (msg.createSurface) {
@@ -31,16 +26,13 @@ export default function A2UISurfaceMessage({ messages, onAction }: Props) {
     }
     if (surfaceIds.length === 0) surfaceIds.push('default')
 
-    // Process all messages
     // @ts-expect-error processMessages is accessible at runtime
     processor.processMessages(messages)
 
-    // Build surface list
     const result: Array<{ id: string; model: SurfaceModel<never> }> = []
     for (const id of surfaceIds) {
       const surface = processor.model.getSurface(id)
       if (surface) {
-        // Wire action handler on each surface
         (surface.onAction as unknown as {
           subscribe: (cb: (action: Record<string, unknown>) => void) => { unsubscribe: () => void }
         }).subscribe((action: Record<string, unknown>) => {
@@ -50,7 +42,12 @@ export default function A2UISurfaceMessage({ messages, onAction }: Props) {
       }
     }
     setSurfaces(result)
-  }, [messages, onAction])
+
+    return () => {
+      processor.model.dispose()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   if (surfaces.length === 0) return null
 
@@ -62,3 +59,5 @@ export default function A2UISurfaceMessage({ messages, onAction }: Props) {
     </div>
   )
 }
+
+export default memo(A2UISurfaceMessageInner)

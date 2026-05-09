@@ -10,8 +10,4 @@ styleEl.id = 'a2ui-structural-styles'
 styleEl.textContent = structuralStyles + '\n' + componentSpecificStyles
 document.head.appendChild(styleEl)
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-)
+ReactDOM.createRoot(document.getElementById('root')!).render(<App />)
