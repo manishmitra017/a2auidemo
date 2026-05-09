@@ -1,12 +1,11 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html, body, #root { height: 100%; overflow: hidden; }
+html, body, #root { height: 100%; overflow: hidden; width: 100%; }
 
 body {
   font-family: 'Inter', sans-serif;
   background: #f0f4f8;
   color: #1a1a2e;
-  display: flex;
 }
 
 #app {
