@@ -11,12 +11,15 @@
  * generate incrementally and for renderers to update individual components.
  */
 
+let _rendererCounter = 0;
+
 class A2UIRenderer {
   constructor(containerId) {
     this.container = document.getElementById(containerId);
     this.surfaces = {};
     this.onAction = null;
     this.rawMessages = [];
+    this._instanceId = ++_rendererCounter;
   }
 
   processMessages(messages) {
@@ -80,10 +83,11 @@ class A2UIRenderer {
     const surface = this.surfaces[surfaceId];
     if (!surface) return;
 
-    let surfaceEl = document.getElementById(`surface-${surfaceId}`);
+    const domId = `surface-${this._instanceId}-${surfaceId}`;
+    let surfaceEl = document.getElementById(domId);
     if (!surfaceEl) {
       surfaceEl = document.createElement('div');
-      surfaceEl.id = `surface-${surfaceId}`;
+      surfaceEl.id = domId;
       surfaceEl.className = 'a2ui-surface';
       this.container.appendChild(surfaceEl);
     }
