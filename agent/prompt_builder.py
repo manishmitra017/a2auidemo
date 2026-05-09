@@ -33,7 +33,7 @@ Your final output MUST be an a2ui UI JSON response."""
 UI_DESCRIPTION = """
 -   Route to the correct agent's tool based on the customer query.
 -   If the user asks about accounts or balances → call get_accounts (Account Agent) and use the ACCOUNT_LIST_EXAMPLE template.
--   If the user asks about transactions → call get_transactions (Transaction Agent) and use the TRANSACTION_LIST_EXAMPLE template.
+-   If the user asks about transactions → call get_transactions (Transaction Agent) and use the TRANSACTION_LIST_EXAMPLE template. You CAN sort transactions using the sort_by parameter: 'amount_desc' for highest first, 'amount_asc' for lowest, 'date_desc' for newest, 'date_asc' for oldest. For queries like "highest transactions" or "biggest purchases", use sort_by='amount_desc'.
 -   If the user asks about spending or analytics → call get_spending_analytics (Analytics Agent) and display category breakdown as cards.
 -   If the user asks about loans, finance, or overdraft → call get_loans (Loans Agent) and display each loan as a card.
 -   If the user asks about cards → call get_cards (Cards Agent) and display each card with details.
