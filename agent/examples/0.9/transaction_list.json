@@ -1,0 +1,108 @@
+[
+  {
+    "version": "v0.9",
+    "createSurface": {
+      "surfaceId": "default",
+      "catalogId": "https://a2ui.org/specification/v0_9/basic_catalog.json",
+      "theme": {
+        "primaryColor": "#1565C0",
+        "font": "Roboto"
+      }
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateComponents": {
+      "surfaceId": "default",
+      "components": [
+        {
+          "id": "root",
+          "component": "Column",
+          "children": ["title-heading", "txn-list"]
+        },
+        {
+          "id": "title-heading",
+          "component": "Text",
+          "variant": "h1",
+          "text": { "path": "/title" }
+        },
+        {
+          "id": "txn-list",
+          "component": "List",
+          "direction": "vertical",
+          "children": { "componentId": "txn-card-template", "path": "/items" }
+        },
+        {
+          "id": "txn-card-template",
+          "component": "Card",
+          "child": "txn-row"
+        },
+        {
+          "id": "txn-row",
+          "component": "Row",
+          "children": ["txn-details", "txn-amount"]
+        },
+        {
+          "id": "txn-details",
+          "component": "Column",
+          "weight": 3,
+          "children": ["txn-description", "txn-date", "txn-category"]
+        },
+        {
+          "id": "txn-description",
+          "component": "Text",
+          "variant": "h4",
+          "text": { "path": "description" }
+        },
+        {
+          "id": "txn-date",
+          "component": "Text",
+          "variant": "caption",
+          "text": { "path": "date" }
+        },
+        {
+          "id": "txn-category",
+          "component": "Text",
+          "variant": "caption",
+          "text": { "path": "category" }
+        },
+        {
+          "id": "txn-amount",
+          "component": "Text",
+          "variant": "h3",
+          "weight": 1,
+          "text": { "path": "amount" }
+        }
+      ]
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateDataModel": {
+      "surfaceId": "default",
+      "path": "/title",
+      "value": "Recent Transactions"
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateDataModel": {
+      "surfaceId": "default",
+      "path": "/items",
+      "value": [
+        {
+          "description": "Salary Deposit",
+          "date": "2026-05-07",
+          "category": "Income",
+          "amount": "+$8,500.00"
+        },
+        {
+          "description": "Amazon Purchase",
+          "date": "2026-05-06",
+          "category": "Shopping",
+          "amount": "-$129.99"
+        }
+      ]
+    }
+  }
+]

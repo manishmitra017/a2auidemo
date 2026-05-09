@@ -1,0 +1,160 @@
+[
+  {
+    "version": "v0.9",
+    "createSurface": {
+      "surfaceId": "default",
+      "catalogId": "https://a2ui.org/specification/v0_9/basic_catalog.json",
+      "theme": {
+        "primaryColor": "#1565C0",
+        "font": "Roboto"
+      }
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateComponents": {
+      "surfaceId": "default",
+      "components": [
+        {
+          "id": "root",
+          "component": "Column",
+          "children": ["title-heading", "item-list"]
+        },
+        {
+          "id": "title-heading",
+          "component": "Text",
+          "variant": "h1",
+          "text": { "path": "/title" }
+        },
+        {
+          "id": "item-list",
+          "component": "List",
+          "direction": "vertical",
+          "children": { "componentId": "account-card-template", "path": "/items" }
+        },
+        {
+          "id": "account-card-template",
+          "component": "Card",
+          "child": "card-layout"
+        },
+        {
+          "id": "card-layout",
+          "component": "Column",
+          "children": ["account-name-row", "divider", "balance-row", "account-actions"]
+        },
+        {
+          "id": "account-name-row",
+          "component": "Row",
+          "children": ["account-name", "account-type"]
+        },
+        {
+          "id": "account-name",
+          "component": "Text",
+          "variant": "h3",
+          "text": { "path": "name" }
+        },
+        {
+          "id": "account-type",
+          "component": "Text",
+          "variant": "caption",
+          "text": { "path": "type" }
+        },
+        {
+          "id": "divider",
+          "component": "Divider"
+        },
+        {
+          "id": "balance-row",
+          "component": "Row",
+          "children": ["balance-label", "balance-value"]
+        },
+        {
+          "id": "balance-label",
+          "component": "Text",
+          "text": "Balance:"
+        },
+        {
+          "id": "balance-value",
+          "component": "Text",
+          "variant": "h3",
+          "text": { "path": "balance" }
+        },
+        {
+          "id": "account-actions",
+          "component": "Row",
+          "children": ["view-txn-btn", "transfer-btn"]
+        },
+        {
+          "id": "view-txn-btn",
+          "component": "Button",
+          "child": "view-txn-text",
+          "variant": "default",
+          "action": {
+            "event": {
+              "name": "view_transactions",
+              "context": {
+                "accountId": { "path": "accountId" },
+                "accountName": { "path": "name" }
+              }
+            }
+          }
+        },
+        {
+          "id": "view-txn-text",
+          "component": "Text",
+          "text": "View Transactions"
+        },
+        {
+          "id": "transfer-btn",
+          "component": "Button",
+          "child": "transfer-text",
+          "variant": "primary",
+          "action": {
+            "event": {
+              "name": "initiate_transfer",
+              "context": {
+                "accountId": { "path": "accountId" },
+                "accountName": { "path": "name" },
+                "balance": { "path": "balance" }
+              }
+            }
+          }
+        },
+        {
+          "id": "transfer-text",
+          "component": "Text",
+          "text": "Transfer"
+        }
+      ]
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateDataModel": {
+      "surfaceId": "default",
+      "path": "/title",
+      "value": "Your Accounts"
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateDataModel": {
+      "surfaceId": "default",
+      "path": "/items",
+      "value": [
+        {
+          "accountId": "ACC-1001",
+          "name": "Primary Savings",
+          "type": "Savings",
+          "balance": "$24,850.75"
+        },
+        {
+          "accountId": "ACC-1002",
+          "name": "Daily Checking",
+          "type": "Checking",
+          "balance": "$5,230.40"
+        }
+      ]
+    }
+  }
+]

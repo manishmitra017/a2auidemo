@@ -1,0 +1,9 @@
+[project]
+name = "bank-mock-server"
+version = "0.1.0"
+description = "Mock banking API server"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn>=0.34.0",
+]

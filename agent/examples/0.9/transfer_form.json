@@ -1,0 +1,104 @@
+[
+  {
+    "version": "v0.9",
+    "createSurface": {
+      "surfaceId": "transfer-form",
+      "catalogId": "https://a2ui.org/specification/v0_9/basic_catalog.json",
+      "theme": {
+        "primaryColor": "#1565C0",
+        "font": "Roboto"
+      }
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateComponents": {
+      "surfaceId": "transfer-form",
+      "components": [
+        {
+          "id": "root",
+          "component": "Column",
+          "children": [
+            "transfer-title",
+            "from-account-label",
+            "amount-field",
+            "to-account-field",
+            "note-field",
+            "submit-button"
+          ]
+        },
+        {
+          "id": "transfer-title",
+          "component": "Text",
+          "variant": "h2",
+          "text": { "path": "/title" }
+        },
+        {
+          "id": "from-account-label",
+          "component": "Text",
+          "text": { "path": "/fromAccountLabel" }
+        },
+        {
+          "id": "amount-field",
+          "component": "TextField",
+          "label": "Amount ($)",
+          "value": { "path": "/amount" },
+          "variant": "number"
+        },
+        {
+          "id": "to-account-field",
+          "component": "ChoicePicker",
+          "label": "Transfer To",
+          "value": { "path": "/toAccount" },
+          "options": [
+            { "label": "Primary Savings (ACC-1001)", "value": "ACC-1001" },
+            { "label": "Daily Checking (ACC-1002)", "value": "ACC-1002" }
+          ]
+        },
+        {
+          "id": "note-field",
+          "component": "TextField",
+          "label": "Note (optional)",
+          "value": { "path": "/note" }
+        },
+        {
+          "id": "submit-button",
+          "component": "Button",
+          "child": "submit-text",
+          "variant": "primary",
+          "action": {
+            "event": {
+              "name": "submit_transfer",
+              "context": {
+                "fromAccount": { "path": "/fromAccount" },
+                "toAccount": { "path": "/toAccount" },
+                "amount": { "path": "/amount" },
+                "note": { "path": "/note" }
+              }
+            }
+          }
+        },
+        {
+          "id": "submit-text",
+          "component": "Text",
+          "text": "Submit Transfer"
+        }
+      ]
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateDataModel": {
+      "surfaceId": "transfer-form",
+      "path": "/",
+      "value": {
+        "title": "Transfer from [AccountName]",
+        "fromAccountLabel": "From: [AccountName] (Balance: [Balance])",
+        "fromAccount": "[AccountId]",
+        "amount": "",
+        "toAccount": "",
+        "note": ""
+      }
+    }
+  }
+]

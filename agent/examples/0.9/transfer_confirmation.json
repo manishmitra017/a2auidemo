@@ -1,0 +1,76 @@
+[
+  {
+    "version": "v0.9",
+    "createSurface": {
+      "surfaceId": "confirmation",
+      "catalogId": "https://a2ui.org/specification/v0_9/basic_catalog.json",
+      "theme": {
+        "primaryColor": "#1565C0",
+        "font": "Roboto"
+      }
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateComponents": {
+      "surfaceId": "confirmation",
+      "components": [
+        {
+          "id": "root",
+          "component": "Card",
+          "child": "confirmation-column"
+        },
+        {
+          "id": "confirmation-column",
+          "component": "Column",
+          "children": [
+            "confirm-title",
+            "divider1",
+            "confirm-details",
+            "divider2",
+            "confirm-note",
+            "divider3",
+            "confirm-footer"
+          ]
+        },
+        {
+          "id": "confirm-title",
+          "component": "Text",
+          "variant": "h2",
+          "text": { "path": "/title" }
+        },
+        {
+          "id": "confirm-details",
+          "component": "Text",
+          "text": { "path": "/transferDetails" }
+        },
+        {
+          "id": "confirm-note",
+          "component": "Text",
+          "text": { "path": "/note" }
+        },
+        {
+          "id": "confirm-footer",
+          "component": "Text",
+          "variant": "h5",
+          "text": "Transfer completed successfully!"
+        },
+        { "id": "divider1", "component": "Divider" },
+        { "id": "divider2", "component": "Divider" },
+        { "id": "divider3", "component": "Divider" }
+      ]
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateDataModel": {
+      "surfaceId": "confirmation",
+      "path": "/",
+      "value": {
+        "title": "Transfer Confirmed",
+        "transferDetails": "$[Amount] transferred from [FromAccount] to [ToAccount]",
+        "note": "Note: [Note]"
+      }
+    }
+  }
+]
