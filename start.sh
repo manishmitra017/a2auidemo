@@ -50,18 +50,18 @@ sleep 5
 
 # Verify agent is up
 if ! curl -s http://localhost:10002/.well-known/agent-card.json > /dev/null 2>&1; then
-  echo "ERROR: Agent failed to start. Check your GEMINI_API_KEY in agent/.env"
+  echo "ERROR: Agent failed to start. Check your GEMINI_API_KEY in agent/.env.local"
   kill $MOCK_PID $AGENT_PID 2>/dev/null
   exit 1
 fi
 echo "  [OK] Agent running (8 sub-agents loaded)"
 
-# 3. Start web client
+# 3. Start web client (Vite + React)
 cd "$SCRIPT_DIR/client"
-uv run python -m http.server 8080 &
+npm run dev > /dev/null 2>&1 &
 CLIENT_PID=$!
-sleep 1
-echo "  [OK] Client running"
+sleep 3
+echo "  [OK] Client running (React + @a2ui/react)"
 
 echo ""
 echo "  All systems go! Open http://localhost:8080"

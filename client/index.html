@@ -1,64 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bank Assistant — A2UI Demo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div id="app">
-    <header>
-      <div class="logo">
-        <span class="material-icons">account_balance</span>
-        <h1>Bank Assistant</h1>
-      </div>
-      <span class="badge">Powered by A2UI</span>
-    </header>
-
-    <main id="chat-area">
-      <div id="welcome" class="welcome">
-        <h2>Welcome to your Bank Assistant</h2>
-        <p>Ask me about accounts, transactions, loans, cards, merchant services, international payments, and more.</p>
-        <div class="suggestions">
-          <button class="suggestion" onclick="sendSuggestion(this)">Show my account balances</button>
-          <button class="suggestion" onclick="sendSuggestion(this)">What are my recent transactions?</button>
-          <button class="suggestion" onclick="sendSuggestion(this)">Where do I spend the most?</button>
-          <button class="suggestion" onclick="sendSuggestion(this)">Show my business loans</button>
-          <button class="suggestion" onclick="sendSuggestion(this)">Show my business cards</button>
-          <button class="suggestion" onclick="sendSuggestion(this)">Merchant services summary</button>
-          <button class="suggestion" onclick="sendSuggestion(this)">Show FX exchange rates</button>
-          <button class="suggestion" onclick="sendSuggestion(this)">What products do you offer?</button>
-        </div>
-      </div>
-      <div id="chat-flow"></div>
-    </main>
-
-    <footer>
-      <form id="input-form" onsubmit="handleSubmit(event)">
-        <input type="text" id="user-input" placeholder="Ask about your accounts, transactions, transfers..." autocomplete="off">
-        <button type="submit" id="send-btn">
-          <span class="material-icons">send</span>
-        </button>
-      </form>
-    </footer>
-  </div>
-
-  <!-- Debug panel: shows raw A2UI JSON the agent generates -->
-  <div id="debug-toggle" onclick="toggleDebug()">
-    <span class="material-icons">code</span> A2UI JSON
-  </div>
-  <div id="debug-panel" class="hidden">
-    <div class="debug-header">
-      <h3>Raw A2UI Messages (from agent)</h3>
-      <button onclick="toggleDebug()">Close</button>
-    </div>
-    <pre id="debug-json"></pre>
-  </div>
-
-  <script src="a2ui-renderer.js"></script>
-  <script src="app.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bank Assistant — A2UI Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
