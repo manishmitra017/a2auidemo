@@ -210,11 +210,12 @@ footer button:disabled { background: #ccc; cursor: not-allowed; }
   word-break: break-all;
 }
 
-/* Force light mode for A2UI surfaces */
+/* Force light mode and full width for A2UI surfaces */
 .a2ui-surface, .a2ui-response {
   color-scheme: light !important;
   color: #1a1a2e;
   font-family: 'Inter', sans-serif;
+  width: 100%;
 }
 
 .a2ui-surface .a2ui-card {
@@ -262,5 +263,9 @@ footer button:disabled { background: #ccc; cursor: not-allowed; }
 .a2ui-surface h5 { font-size: 13px; font-weight: 500; }
 
 .a2ui-surface .a2ui-row > section { gap: 12px; }
-.a2ui-surface .a2ui-column > section { gap: 8px; }
+.a2ui-surface .a2ui-column > section { gap: 8px; width: 100%; }
 .a2ui-surface .a2ui-list > section { gap: 12px; }
+
+.a2ui-surface .a2ui-column { width: 100%; }
+.a2ui-surface .a2ui-list { width: 100%; }
+.a2ui-surface .a2ui-row { width: 100%; }
